@@ -93,56 +93,109 @@ int main() {
     printf("Densidade Populacional: %.2f hab/km²\n", densidade2);
     printf("PIB per capita: %.2f\n", pibpercapita2);
 
-    // Comparação de cartas
-    printf("\nEscolha o atributo para comparar:\n");
-    printf("1 - População\n");
-    printf("2 - Área\n");
-    printf("3 - PIB\n");
-    printf("4 - Pontos Turísticos\n");
-    printf("5 - Densidade Populacional\n");
     int escolha;
-    scanf("%d", &escolha);
+    do {
+        printf("\nEscolha o atributo para comparar:\n");
+        printf("1 - População\n");
+        printf("2 - Área\n");
+        printf("3 - PIB\n");
+        printf("4 - Pontos Turísticos\n");
+        printf("5 - Densidade Populacional\n");
+        printf("0 - Sair\n");
+        scanf("%d", &escolha);
 
-    printf("\nResultado da comparação:\n");
+        printf("\nResultado da comparação:\n");
 
-    if (escolha == 1) {
-        if (populacao1 > populacao2)
-            printf("Carta 1 venceu pela maior população.\n");
-        else if (populacao2 > populacao1)
-            printf("Carta 2 venceu pela maior população.\n");
-        else
-            printf("Empate em população.\n");
-    } else if (escolha == 2) {
-        if (area1 > area2)
-            printf("Carta 1 venceu pela maior área.\n");
-        else if (area2 > area1)
-            printf("Carta 2 venceu pela maior área.\n");
-        else
-            printf("Empate em área.\n");
-    } else if (escolha == 3) {
-        if (pib1 > pib2)
-            printf("Carta 1 venceu pelo maior PIB.\n");
-        else if (pib2 > pib1)
-            printf("Carta 2 venceu pelo maior PIB.\n");
-        else
-            printf("Empate em PIB.\n");
-    } else if (escolha == 4) {
-        if (turistico1 > turistico2)
-            printf("Carta 1 venceu por ter mais pontos turísticos.\n");
-        else if (turistico2 > turistico1)
-            printf("Carta 2 venceu por ter mais pontos turísticos.\n");
-        else
-            printf("Empate em pontos turísticos.\n");
-    } else if (escolha == 5) {
-        if (densidade1 < densidade2)
-            printf("Carta 1 venceu pela menor densidade populacional.\n");
-        else if (densidade2 < densidade1)
-            printf("Carta 2 venceu pela menor densidade populacional.\n");
-        else
-            printf("Empate em densidade populacional.\n");
-    } else {
-        printf("Opção inválida.\n");
-    }
+        switch (escolha) {
+            case 1:
+                if (populacao1 > populacao2)
+                    printf("Carta 1 venceu pela maior população.\n");
+                else if (populacao2 > populacao1)
+                    printf("Carta 2 venceu pela maior população.\n");
+                else {
+                    printf("Empate em população. Desempate pelo PIB...\n");
+                    if (pib1 > pib2)
+                        printf("Carta 1 venceu pelo maior PIB.\n");
+                    else if (pib2 > pib1)
+                        printf("Carta 2 venceu pelo maior PIB.\n");
+                    else
+                        printf("Empate total.\n");
+                }
+                break;
+
+            case 2:
+                if (area1 > area2)
+                    printf("Carta 1 venceu pela maior área.\n");
+                else if (area2 > area1)
+                    printf("Carta 2 venceu pela maior área.\n");
+                else {
+                    printf("Empate em área. Desempate pelo número de pontos turísticos...\n");
+                    if (turistico1 > turistico2)
+                        printf("Carta 1 venceu.\n");
+                    else if (turistico2 > turistico1)
+                        printf("Carta 2 venceu.\n");
+                    else
+                        printf("Empate total.\n");
+                }
+                break;
+
+            case 3:
+                if (pib1 > pib2)
+                    printf("Carta 1 venceu pelo maior PIB.\n");
+                else if (pib2 > pib1)
+                    printf("Carta 2 venceu pelo maior PIB.\n");
+                else {
+                    printf("Empate em PIB. Desempate pela população...\n");
+                    if (populacao1 > populacao2)
+                        printf("Carta 1 venceu.\n");
+                    else if (populacao2 > populacao1)
+                        printf("Carta 2 venceu.\n");
+                    else
+                        printf("Empate total.\n");
+                }
+                break;
+
+            case 4:
+                if (turistico1 > turistico2)
+                    printf("Carta 1 venceu por ter mais pontos turísticos.\n");
+                else if (turistico2 > turistico1)
+                    printf("Carta 2 venceu por ter mais pontos turísticos.\n");
+                else {
+                    printf("Empate em pontos turísticos. Desempate pelo PIB...\n");
+                    if (pib1 > pib2)
+                        printf("Carta 1 venceu.\n");
+                    else if (pib2 > pib1)
+                        printf("Carta 2 venceu.\n");
+                    else
+                        printf("Empate total.\n");
+                }
+                break;
+
+            case 5:
+                if (densidade1 < densidade2)
+                    printf("Carta 1 venceu pela menor densidade populacional.\n");
+                else if (densidade2 < densidade1)
+                    printf("Carta 2 venceu pela menor densidade populacional.\n");
+                else {
+                    printf("Empate em densidade. Desempate pelo PIB per capita...\n");
+                    if (pibpercapita1 > pibpercapita2)
+                        printf("Carta 1 venceu.\n");
+                    else if (pibpercapita2 > pibpercapita1)
+                        printf("Carta 2 venceu.\n");
+                    else
+                        printf("Empate total.\n");
+                }
+                break;
+
+            case 0:
+                printf("Saindo...\n");
+                break;
+
+            default:
+                printf("Opção inválida.\n");
+        }
+
+    } while (escolha != 0);
 
     return 0;
 }
